@@ -83,6 +83,8 @@ exports.logoutAdmin = asyncHandler((req, res) => {
 //login user
 //logout user
 exports.registerUser = asyncHandler(async (req, res) => {
+    console.log(req.body);
+    
     const isFound = await User.findOne({ email: req.body.email })//object
     if (isFound) {
         return res.status(401).json({ message: "email already exist,please use another email" })
@@ -116,6 +118,7 @@ exports.loginUser = asyncHandler(async (req, res) => {
             _id: result._id,
             name: result.name,
             email: result.email,
+            mobile:result.mobile,
             city: result.city,
             address: result.address,
             infoComplete: result.infoComplete
