@@ -108,7 +108,7 @@ exports.loginUser = asyncHandler(async (req, res) => {
 
     }
 
-    const token = jwt.sign({ _id: result._id }, process.env.jWT_SECRET)
+    const token = jwt.sign({ _id: result._id }, process.env.JWT_SECRET)
     res.cookie("olx-user", token, {
         maxAge: 10000 * 60 * 60 * 24,
         httpOnly: true,
