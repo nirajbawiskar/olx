@@ -4,10 +4,12 @@ require("dotenv").config()
 const cors = require('cors')
 const cookieParser = require("cookie-parser")
 const { adminProtected, userProtected } = require("./middlewares/Protected")
+const path=require("path")
 
 const app = express()
 app.use(express.json())
 app.use(cookieParser())
+app.use(express.static("dist"))
 app.use(cors({
     origin: true,
     credentials: true
@@ -20,7 +22,9 @@ app.use((err, req, res, next) => {
     console.log(err)
     res.status(500).json({ message: "server error" })
 })
-
+app.use("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "dist", "index.html"))
+})
 mongoose.connect(process.env.MONGO_URL)
 mongoose.connection.once("open", () => {
     console.log("db connected")

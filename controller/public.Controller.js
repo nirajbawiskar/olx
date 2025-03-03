@@ -17,10 +17,7 @@ exports.getPublicProducts = async (req, res) => {
 
 
 exports.getPublicProductDetails = async (req, res) => {
-    // const pId = req.params.productId
-    // if (!pId) {
-    //     return res.status(400).json({ message: "id not found" })
-    // }
+    
     const result = await Product.findById(req.params.productId).populate("seller")
     res.json({ meassage: "get product detail success", result })
 
